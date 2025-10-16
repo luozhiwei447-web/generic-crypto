@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: generic-crypto
+  profiles:
+    active: local
+
+logging:
+  level:
+    com.ray.crypto: DEBUG
+    org.springframework.cloud.openfeign: DEBUG
