@@ -14,6 +14,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ResultCode {
     SYSTEM_ERROR(500,"系统错误"),
+    API_ERROR(9001,"API错误"),
     SUCCESS(200,"成功"),
     ;
 

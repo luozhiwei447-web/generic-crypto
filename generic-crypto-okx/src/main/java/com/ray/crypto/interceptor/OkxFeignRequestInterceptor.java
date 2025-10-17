@@ -36,7 +36,7 @@ import static java.time.ZoneOffset.UTC;
  */
 @Slf4j
 @Component
-public class OkxFeignInterceptor implements RequestInterceptor {
+public class OkxFeignRequestInterceptor implements RequestInterceptor {
 
     private final String ACCESS_KEY="OK-ACCESS-KEY";
     private final String ACCESS_SIGN="OK-ACCESS-SIGN";
@@ -60,8 +60,7 @@ public class OkxFeignInterceptor implements RequestInterceptor {
         
         // 生成签名
         String signature = SignatureUtils.hmacSha256(signString,okxCryptoProperties.getApiSecret());
-        signature=SignatureUtils.base64Encode(signature);
-        
+
         // 添加认证头
         template.header(ACCESS_TIMESTAMP, timestamp);
         template.header(ACCESS_SIGN, signature);
@@ -82,7 +81,7 @@ public class OkxFeignInterceptor implements RequestInterceptor {
           .append(path);
         
         if (queryParams != null && !queryParams.isEmpty()) {
-            sb.append("?").append(queryParams);
+            sb.append(queryParams);
         }
         
         return sb.toString();

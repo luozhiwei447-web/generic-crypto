@@ -21,11 +21,11 @@ public class SignatureUtils {
     private final static String HMAC_SHA256 = "HmacSHA256";
 
     /**
-     * HMAC加密
+     * HMAC-SHA256加密
      * 
      * @param data 待加密数据
      * @param key 密钥
-     * @return 加密后的十六进制字符串
+     * @return Base64编码的签名字符串
      */
     public static String hmacSha256(String data, String key) {
         try {
@@ -33,9 +33,9 @@ public class SignatureUtils {
             SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), HMAC_SHA256);
             mac.init(secretKeySpec);
             byte[] hash = mac.doFinal(data.getBytes(StandardCharsets.UTF_8));
-            return new String(hash,StandardCharsets.UTF_8);
+            return Base64.getEncoder().encodeToString(hash);
         } catch (NoSuchAlgorithmException | InvalidKeyException e) {
-            throw new RuntimeException("HMAC算法不可用: " + HMAC_SHA256, e);
+            throw new RuntimeException("HMAC-SHA256签名失败", e);
         }
     }
 
