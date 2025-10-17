@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 /**
@@ -41,12 +40,6 @@ public class OkxResponseDecoder implements Decoder {
             log.error("OKX API调用失败: code={}, msg={}", okxResponse.getCode(), okxResponse.getMsg());
             throw new DecodeException(response.status(), "OKX API错误: " + okxResponse.getMsg(), response.request());
         }
-
-        // 如果返回类型是OkxResponse，直接返回
-//        if (type instanceof ParameterizedType &&
-//            ((ParameterizedType) type).getRawType().equals(OkxResponse.class)) {
-//            return okxResponse;
-//        }
 
         // 否则直接返回data部分
         return okxResponse.getData();

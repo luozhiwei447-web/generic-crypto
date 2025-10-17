@@ -51,12 +51,18 @@ public class OkxFeignRequestInterceptor implements RequestInterceptor {
     public void apply(RequestTemplate template) {
         // 获取请求参数
         String queryParams = template.queryLine();
+        
+        // 获取请求体
+        String body = "";
+        if (template.body() != null) {
+            body = new String(template.body());
+        }
 
         // 生成时间戳
         String timestamp = Instant.now().truncatedTo(ChronoUnit.MILLIS).toString();
 
         // 构建签名字符串
-        String signString = buildSignString(template.method(), template.path(), queryParams, timestamp);
+        String signString = buildSignString(template.method(), template.path(), queryParams, body, timestamp);
         
         // 生成签名
         String signature = SignatureUtils.hmacSha256(signString,okxCryptoProperties.getApiSecret());
@@ -67,14 +73,14 @@ public class OkxFeignRequestInterceptor implements RequestInterceptor {
         template.header(ACCESS_KEY, okxCryptoProperties.getApiKey());
         template.header(ACCESS_PASSPHRASE, okxCryptoProperties.getPassphrase());
         
-        log.debug("Feign request encrypted - Method: {}, Path: {}, Signature: {}", 
-                template.method(), template.path(), signature);
+        log.debug("Feign request encrypted - Method: {}, Path: {}, Body: {}, Signature: {}", 
+                template.method(), template.path(), body, signature);
     }
     
     /**
      * 构建签名字符串
      */
-    private String buildSignString(String method, String path, String queryParams, String timestamp) {
+    private String buildSignString(String method, String path, String queryParams, String body, String timestamp) {
         StringBuilder sb = new StringBuilder();
         sb.append(timestamp)
           .append(method)
@@ -82,6 +88,11 @@ public class OkxFeignRequestInterceptor implements RequestInterceptor {
         
         if (queryParams != null && !queryParams.isEmpty()) {
             sb.append(queryParams);
+        }
+        
+        // POST请求添加body到签名字符串
+        if (body != null && !body.isEmpty()) {
+            sb.append(body);
         }
         
         return sb.toString();
