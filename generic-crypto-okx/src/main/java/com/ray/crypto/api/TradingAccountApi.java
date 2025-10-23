@@ -56,8 +56,6 @@ import com.ray.crypto.module.IsolatedMarginModeRequest;
 import com.ray.crypto.module.MaxWithdrawalInfo;
 import com.ray.crypto.module.MaxWithdrawalRequest;
 import com.ray.crypto.module.RiskStateInfo;
-import com.ray.crypto.module.VipInterestRateInfo;
-import com.ray.crypto.module.VipInterestRateRequest;
 import com.ray.crypto.module.BorrowInterestLimitInfo;
 import com.ray.crypto.module.BorrowInterestLimitRequest;
 import com.ray.crypto.module.SetAutoEarnInfo;

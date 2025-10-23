@@ -1,6 +1,7 @@
 package com.ray.crypto.core.config;
 
 import com.ray.crypto.common.mudules.config.CryptoProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,10 @@ public class CryptoConfiguration {
     }
 
     @Bean
+    @ConfigurationProperties(prefix = "crypto")
+    public CryptoProperties cryptoProperties() {
+        return new CryptoProperties();
+    }
     public Map<String, CryptoProperties> cryptoPropertiesMap() {
         Map<String, CryptoProperties> configMap = new HashMap<>();
         
@@ -43,8 +48,9 @@ public class CryptoConfiguration {
         
         return configMap;
     }
-    
+
     @Bean("okxCryptoProperties")
+    @ConfigurationProperties(prefix = "crypto.okx")
     public CryptoProperties okxCryptoProperties() {
         return cryptoPropertiesMap().get("okx");
     }
