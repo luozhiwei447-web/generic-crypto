@@ -117,10 +117,43 @@ public void getInstruments() {
 }
 ```
 
+### 下单交易
+
+```java
+@Autowired
+private TradingApi tradingApi;
+
+// 单笔下单
+public void placeOrder() {
+    PlaceOrderRequest request = new PlaceOrderRequest();
+    request.setInstId("BTC-USDT");
+    request.setTdMode(TradeMode.CASH);
+    request.setSide(OrderSide.BUY);
+    request.setOrdType(OrderType.LIMIT);
+    request.setSz("0.01");
+    request.setPx("50000");
+    
+    OkxResponse<List<PlaceOrderInfo>> response = tradingApi.placeOrder(request);
+    // 处理返回结果
+}
+
+// 批量下单
+public void placeBatchOrders() {
+    List<PlaceOrderRequest> requests = Arrays.asList(
+        createOrderRequest("BTC-USDT", "0.01", "50000"),
+        createOrderRequest("ETH-USDT", "0.1", "3000")
+    );
+    
+    OkxResponse<List<PlaceOrderInfo>> response = tradingApi.placeBatchOrders(requests);
+    // 处理返回结果
+}
+```
+
 ## API文档
 
 详细的API使用文档请参考：
 - [Feign使用文档](docs/feign-usage.md)
+- [交易API使用文档](docs/trading-api-usage.md)
 
 ## 开发规范
 
@@ -181,3 +214,5 @@ OKX交易所集成模块，包含：
 - 集成OKX交易所API
 - 实现基础的交易产品信息查询功能
 - 添加HMAC-SHA256签名支持
+- 集成OKX下单API
+- 添加订单相关常量枚举

@@ -1,5 +1,7 @@
 package com.ray.crypto.constants;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * 交易模式枚举
  * 
@@ -23,6 +25,7 @@ public enum TradeMode {
         this.value = value;
     }
     
+    @JsonValue
     public String getValue() {
         return value;
     }

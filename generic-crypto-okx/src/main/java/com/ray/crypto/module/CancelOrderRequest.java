@@ -3,13 +3,13 @@ package com.ray.crypto.module;
 import lombok.Data;
 
 /**
- * 获取订单详情请求
+ * 撤单请求
  * 
  * @author ray
  * @date 2024-01-01
  */
 @Data
-public class OrderDetailsRequest {
+public class CancelOrderRequest {
     /**
      * 产品ID
      */

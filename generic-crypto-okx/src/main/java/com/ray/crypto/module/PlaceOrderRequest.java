@@ -1,5 +1,9 @@
 package com.ray.crypto.module;
 
+import com.ray.crypto.constants.OrderSide;
+import com.ray.crypto.constants.OrderType;
+import com.ray.crypto.constants.PositionSide;
+import com.ray.crypto.constants.TradeMode;
 import lombok.Data;
 
 /**
@@ -18,17 +22,17 @@ public class PlaceOrderRequest {
     /**
      * 交易模式
      */
-    private String tdMode;
+    private TradeMode tdMode;
     
     /**
      * 订单方向
      */
-    private String side;
+    private OrderSide side;
     
     /**
      * 订单类型
      */
-    private String ordType;
+    private OrderType ordType;
     
     /**
      * 委托数量
@@ -43,7 +47,7 @@ public class PlaceOrderRequest {
     /**
      * 持仓方向
      */
-    private String posSide;
+    private PositionSide posSide;
     
     /**
      * 是否只减仓

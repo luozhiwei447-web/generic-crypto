@@ -3,25 +3,22 @@ package com.ray.crypto.constants;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * 持仓方向枚举
+ * 订单方向枚举
  * 
  * @author ray
  * @date 2024-01-01
  */
-public enum PositionSide {
+public enum OrderSide {
     
-    /** 多头 */
-    LONG("long"),
+    /** 买入 */
+    BUY("buy"),
     
-    /** 空头 */
-    SHORT("short"),
-    
-    /** 净持仓 */
-    NET("net");
+    /** 卖出 */
+    SELL("sell");
     
     private final String value;
     
-    PositionSide(String value) {
+    OrderSide(String value) {
         this.value = value;
     }
     
