@@ -3,22 +3,22 @@ package com.ray.crypto.module;
 import lombok.Data;
 
 /**
- * 获取持仓历史请求
+ * 获取活跃信号机器人请求
  * 
  * @author ray
  * @date 2024-01-01
  */
 @Data
-public class PositionHistoryRequest {
+public class ActiveSignalBotRequest {
+    /**
+     * 策略订单类型
+     */
+    private String algoOrdType;
+    
     /**
      * 策略订单ID
      */
     private String algoId;
-    
-    /**
-     * 产品ID
-     */
-    private String instId;
     
     /**
      * 请求数据的时间范围，单位为毫秒

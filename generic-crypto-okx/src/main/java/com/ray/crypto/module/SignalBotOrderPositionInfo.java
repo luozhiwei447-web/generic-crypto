@@ -3,17 +3,22 @@ package com.ray.crypto.module;
 import lombok.Data;
 
 /**
- * 持仓历史信息
+ * 信号机器人订单持仓信息
  * 
  * @author ray
  * @date 2024-01-01
  */
 @Data
-public class PositionHistoryInfo {
+public class SignalBotOrderPositionInfo {
     /**
      * 策略订单ID
      */
     private String algoId;
+    
+    /**
+     * 策略订单类型
+     */
+    private String algoOrdType;
     
     /**
      * 产品ID
@@ -36,24 +41,29 @@ public class PositionHistoryInfo {
     private String pos;
     
     /**
-     * 开仓价格
+     * 可平仓数量
      */
-    private String openAvgPx;
+    private String availPos;
     
     /**
-     * 平仓价格
+     * 平均开仓价格
      */
-    private String closeAvgPx;
+    private String avgPx;
     
     /**
-     * 收益
+     * 未实现收益
      */
-    private String pnl;
+    private String upl;
     
     /**
-     * 收益率
+     * 未实现收益率
      */
-    private String pnlRatio;
+    private String uplRatio;
+    
+    /**
+     * 保证金
+     */
+    private String margin;
     
     /**
      * 杠杆倍数
@@ -61,17 +71,17 @@ public class PositionHistoryInfo {
     private String lever;
     
     /**
-     * 开仓时间
+     * 标记价格
      */
-    private String openTime;
+    private String markPx;
     
     /**
-     * 平仓时间
+     * 创建时间
      */
-    private String closeTime;
+    private String cTime;
     
     /**
-     * 持仓类型
+     * 更新时间
      */
-    private String type;
+    private String uTime;
 }
